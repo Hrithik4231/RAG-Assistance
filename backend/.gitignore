@@ -45,3 +45,9 @@ env/
 # Project specific
 chroma_db/
 uploads/
+
+venv/
+__pycache__/
+*.pyc
+.env
+uploads/
