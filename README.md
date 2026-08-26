@@ -16,6 +16,7 @@ A Retrieval-Augmented Generation (RAG) application that allows users to upload P
 RAG-AI-Assistant/
 ├── backend/                 # FastAPI backend
 │   ├── rag/
+│   │   ├── embeddings.py
 │   │   ├── pdf_processor.py
 │   │   ├── rag_pipeline.py
 │   │   ├── retriever.py
@@ -37,6 +38,7 @@ RAG-AI-Assistant/
 - Python 3.8+
 - Node.js 14+
 - Google Gemini API Key (get from https://aistudio.google.com/apikey)
+- Hugging Face Access Token (get a free one from https://huggingface.co/settings/tokens)
 
 ## Setup Instructions
 
@@ -69,14 +71,15 @@ RAG-AI-Assistant/
 
 5. **Create .env file:**
    - Copy `.env.example` to `.env`
-   - Add your Google Gemini API key:
+   - Add your Google Gemini API key and Hugging Face token:
      ```env
      GOOGLE_API_KEY=your_api_key_here
+     HF_TOKEN=your_hf_token_here
      ```
 
 6. **Run the backend:**
    ```bash
-   python main.py
+   uvicorn main:app --reload
    ```
    The API will be available at `http://localhost:8000`
 
@@ -112,6 +115,7 @@ Create a `.env` file in the backend directory:
 
 ```env
 GOOGLE_API_KEY=your_google_gemini_api_key_here
+HF_TOKEN=your_hugging_face_token_here
 ```
 
 **Note:** Never commit `.env` to version control. Use `.env.example` as a template.
@@ -124,9 +128,9 @@ GOOGLE_API_KEY=your_google_gemini_api_key_here
 
 ## Technologies Used
 
-- **Backend:** FastAPI, ChromaDB, Sentence Transformers, Google Generative AI
+- **Backend:** FastAPI, ChromaDB, Hugging Face Inference API, Google Generative AI
 - **Frontend:** React, Vite, Axios
-- **Embeddings:** Sentence Transformers (all-MiniLM-L6-v2)
+- **Embeddings:** BAAI/bge-small-en-v1.5, served via the Hugging Face Inference API (no local model download)
 - **Vector Store:** ChromaDB
 
 ## License
